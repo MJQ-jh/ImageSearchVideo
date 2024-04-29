@@ -1,0 +1,186 @@
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+<link rel="stylesheet" href="bulma/css/bulma.min.css">
+ <script src="js/jquery.js"></script>
+</head>
+
+<body>
+<div class="box"><h1 class="title">ImageSearchVideo</h1>
+<!--<h2 class="subtitle">Subtitle</h2>-->
+<div class="tabs">
+  <ul>
+    <li id ="tab1"class="tap is-active" id ="tab1"><a>Search</a></li>
+    <li id ="tab2" class="tap"><a>Upload Video</a></li>
+  </ul>
+</div>
+<div id="body">
+   <div class="box">
+      <div class="file content"  id="content1" style="display:block;">
+      <div style="display:flex">
+      <figure class="image is-128x128" style="width:300px;height:128px">
+      <img id="displaypicture" >
+      </figure>
+      <div id="searchresult" style="display:none">
+      <video id="videodisplay" src="" width="320" height="240" controls>
+   
+    </video>
+    
+     <p id="text1">video name</p>
+     <p id="text2">Time</p>
+     <p id="text3">similarity</p>
+     </div>
+      
+      
+     </div>
+  <label class="file-label">
+    <input class="file-input" type="file" name="resume" id="uploadpicture">
+    <span class="file-cta">
+      <span class="file-label">
+        Choose a picture
+      </span>
+    </span>
+  </label>
+</div>
+   <div class="file content" id="content2" style="display :none">
+   
+   <video style=""  id="videoUploadDisplay" src="" width="320" height="240" controls>
+   
+    </video>
+  <label style="margin-top:10px" class="file-label">
+    <input class="file-input" type="file" name="resume" id="uploadvideo">
+    <span class="file-cta">
+      <span class="file-label">
+        Choose a video
+      </span>
+    </span>
+  </label>
+  <button style="margin-top:10px" class="button" id="uploadVideoButton">Upload</button>
+   </div>
+</div>
+</div>
+</div>
+    <script>
+     $("#tab2").click(function(){
+	    
+	     $(".tap").removeClass("is-active")
+	       $(".content").css("display","none")
+	      $("#tab2").addClass("is-active")
+	      $("#content2").css("display","block")
+	     // content2
+	     
+	  })
+     $("#tab1").click(function(){
+	     
+	     $(".tap").removeClass("is-active")
+	       $(".content").css("display","none")
+	      $("#tab1").addClass("is-active")
+	      $("#content1").css("display","block")
+	  })
+	  
+	     $("#uploadpicture").change(function () {
+	        if (this.files.length) {
+	      let file = this.files[0];
+          let reader = new FileReader();
+        //?? FileReader ??
+        reader.onload = function(){
+          // ? FileReader ??????????????? FileReader.result ???
+         
+          $("#searchresult").css("display","block")
+          //console.log("-"+#server(..SearchVideo(this.result,file.name))#)
+          str=#server(..SearchVideo(this.result,file.name))#
+          arr=str.split(':')
+          $('#videodisplay').attr('src',arr[0])
+          $('#text1').html("VideoName"+arr[0])
+          $('#text2').html("Time:"+arr[1])
+           $('#text3').html("Similarity:"+arr[2])
+          ///?????
+        };
+        // ???????????????base64??
+            reader.readAsBinaryString(file)
+            
+            
+            
+            let reader2 = new FileReader();
+            reader2.readAsDataURL(file);  // ???base64
+            reader2.onload = function () {
+	           $('#displaypicture').attr('src', this.result)
+  	      
+            } 
+	    } 
+        });
+	     $("#uploadVideoButton").click(function(){
+	     
+	     let file = $("#uploadvideo")[0].files[0]
+	     
+	     let reader = new FileReader();
+        //?? FileReader ??
+        reader.onload = function(){
+          // ? FileReader ??????????????? FileReader.result ???
+           
+          
+          alert(#server(..SaveVideo(this.result,file.name))#)
+          ///?????
+        };
+        // ???????????????base64??
+        reader.readAsBinaryString(file)
+	  })
+	  $("#uploadvideo").change(function(){
+	     let file = $("#uploadvideo")[0].files[0]
+	     console.log(file)
+	     let reader = new FileReader();
+        //?? FileReader ??
+        reader.onload = function(){
+          // ? FileReader ??????????????? FileReader.result ???
+           
+           $('#videoUploadDisplay').attr('src',this.result)
+         
+          ///?????
+        };
+        // ???????????????base64??
+        reader.readAsDataURL(file)
+	  })
+    </script>
+<script language=Cache method=SaveVideo arguments="file,filename" returntype=%String>
+   // set ^test=file
+    //set ^tepe=$CLASSNAME(file) 
+    SET tfile=##class(%FileBinaryStream).%New()
+    set tfile.Filename="/usr/irissys/csp/user/videos/"_filename_""
+    //set line=file.Read()
+    if ($CLASSNAME(file) ="%CSP.CharacterStream"){
+    while 'file.AtEnd
+    {
+	     Do tfile.Write(file.Read())
+	 }
+    }else{
+	     Do tfile.Write(file)
+	    
+	    }
+    Do tfile.%Save()  
+     
+     ///
+       Set BS =##class(ImageSearchVideo.BS).%New("ImageSearchVideo.BS")
+       Set tSC=##class(Ens.Director).CreateBusinessService("ImageSearchVideo.BS",.BS)
+       Set request =##class(ImageSearchVideo.request).%New()
+       set request.filename=filename
+       set request.fullurl=tfile.Filename
+       //set request.StringValue="application"
+       set output =##class(Ens.StringResponse).%New()
+       Set tSC1=BS.ProcessInput(request,.output)
+	//
+    Quit "It takes some time to generate vectors"  
+</script>
+<script language=Cache method=SearchVideo arguments="file,filename" returntype=%String>
+      SET tfile=##class(%FileBinaryStream).%New()
+      set tfile.Filename="/usr/irissys/mgr/user/images/"_filename_""
+      Do tfile.Write(file)
+      Do tfile.%Save()
+      set result=##class(ImageSearchVideo.Util.VideoToImg).SelectVideoName(tfile.Filename)
+      do ##class(%File).Delete(tfile.Filename,.a)
+      //w a,!
+      Quit $p(result,"irissys",2)
+</script>
+</body>
+</html>
