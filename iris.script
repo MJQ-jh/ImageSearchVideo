@@ -1,0 +1,4 @@
+     set ns ="USER"
+     do $system.OBJ.ImportDir("/opt/ImageSearchVideo/src/ImageSearchVideo",,"cbrpsuy",,1)
+     
+     halt
