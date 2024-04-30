@@ -10,9 +10,13 @@
      1.访问ip:52773/csp/user/ImgSearchVideoIndex.csp
 
      2.点击uploadvideo
-       上传多个视频（注：需要一定时间，可以在消息追踪页面查看是否完成）
+     
+       上传多个视频（注：需要一定时间，可以在消息追踪页面查看是否完成,测试视频是自己录制的）
 
   ![image](https://github.com/MJQ-jh/ImageSearchVideo/assets/71477062/bd7c6148-516d-4f59-b0e0-a290467610b7)
+
+  ![image](https://github.com/MJQ-jh/ImageSearchVideo/assets/71477062/c09fe6e2-45c7-4695-8b0a-984a3ed8b0cc)
+
 
      3.点击search
 
