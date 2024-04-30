@@ -5,6 +5,9 @@
       <Name>imagesearchvideo</Name>
       <Version>1.0.0</Version>
       <Packaging>module</Packaging>
+       <Invokes>
+          <Invoke Class="ImageSearchVideo.Util.VideoToImg" Method="zpminitialization" Phase="Activate" When="After"/>
+      </Invokes>
       <Resource Name="ImageSearchVideo.PKG"/>
       <CSPApplication CookiePath="/csp/user/" DefaultTimeout="900" DeployPath="d:\work\iris2023\csp\user\" Description="用户 命名空间 应用程序" MatchRoles=":{$dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/user" UnauthenticatedEnabled="1" Url="/csp/user" UseSessionCookie="2"/>
       <SourcesRoot>src</SourcesRoot>
