@@ -119,6 +119,16 @@ ClassMethod SelectVideoName(image) As %String
 	
 	Quit resultname
 }
+ClassMethod zpminitialization() As %Status
+{
+	///
+	new $namespace
+    set $namespace = "%sys"
+	Set Application=##Class(Security.Applications).%OpenId("/csp/user")
+	set Application.ServeFiles=2
+	Set tsc= Application.%Save()
 
+	Quit tsc
+}
 }
 
