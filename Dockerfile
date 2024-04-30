@@ -20,9 +20,9 @@ RUN mkdir -p /usr/irissys/mgr/user/images \
 
 
 USER ${ISC_PACKAGE_MGRUSER}
-RUN python3 -m pip install --target /usr/irissys/mgr/python opencv-python -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
-RUN python3 -m pip install --target /usr/irissys/mgr/python scikit-image -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
-RUN python3 -m pip install --target /usr/irissys/mgr/python nltk -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+RUN python3 -m pip install --target /usr/irissys/mgr/python opencv-python 
+RUN python3 -m pip install --target /usr/irissys/mgr/python scikit-image 
+RUN python3 -m pip install --target /usr/irissys/mgr/python nltk 
 
 RUN iris start IRIS \
     && iris session IRIS < iris.script \
