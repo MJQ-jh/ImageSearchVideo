@@ -1,4 +1,6 @@
      set ns ="USER"
      do $system.OBJ.ImportDir("/opt/ImageSearchVideo/src/ImageSearchVideo",,"cbrpsuy",,1)
-     
+     Set tSC = $ClassMethod("EnsPortal.AutoStartProduction","ApplyID","ImageSearchVideo.Production",0)
+     zn "%SYS"
+     Do ##class(Security.Users).UnExpireUserPasswords("*")
      halt
