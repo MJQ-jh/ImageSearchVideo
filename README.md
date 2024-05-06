@@ -1,5 +1,11 @@
 # ImageSearchVideo
 
+An image search corresponds to a video application
+
+After extracting videos into multiple images by frame, the extracted features of the images are converted into embeddings
+
+Searching for Similar Images through Vector Search
+
 # 1.install
 
    ## docker
