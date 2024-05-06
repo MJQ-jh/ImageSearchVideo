@@ -12,7 +12,7 @@
    
       zpm install imagesearchvideo
       
-# 2.使用过程
+# 2.Usage
 
      1.Visit the localhost:52773/csp/user/ImgSearchVideoIndex.csp
 
