@@ -24,7 +24,7 @@ Searching for Similar Images through Vector Search
 
      2.点击uploadvideo
      
-      Upload video (note: it takes some time, you can check if it is completed on the message tracking page, the test video was recorded by yourself)
+      Upload video (note: it takes some time, you can check if it is completed on the message tracking page, the test video was recorded by myself)
 
   ![image](https://github.com/MJQ-jh/ImageSearchVideo/assets/71477062/bd7c6148-516d-4f59-b0e0-a290467610b7)
 
