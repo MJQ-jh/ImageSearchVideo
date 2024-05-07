@@ -15,8 +15,16 @@ Searching for Similar Images through Vector Search
       docker-compose up -d
       
    ## IPM
-   
+
       zpm install imagesearchvideo
+
+
+      python3 -m pip install --target /usr/ImageSearchVideoPython opencv-python 
+
+      python3 -m pip install --target /usr/ImageSearchVideoPython scikit-image 
+
+      python3 -m pip install --target /usr/ImageSearchVideoPython nltk 
+      
       
 # 2.Usage
 
